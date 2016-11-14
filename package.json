@@ -1,0 +1,24 @@
+{
+  "name": "nja-mail",
+  "version": "1.0.0",
+  "description": "Mobile-responsive, web application to inform Sigma Phi Epsilon NJA members that a package or mail has been delivered for them.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryangardner/nja-mail.git"
+  },
+  "author": "Bryan Gardner, gardner.bryan22@gmail.com",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/bryangardner/nja-mail/issues"
+  },
+  "homepage": "https://github.com/bryangardner/nja-mail#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}
