@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const exphbs = require('express-handlebars');
 const Handlebars = require('handlebars');
 const configRoutes = require("./routes");
+const path = require('path');
 
 const app = express();
 const static = express.static(__dirname + '/public');
