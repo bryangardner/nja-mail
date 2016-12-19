@@ -1,7 +1,13 @@
 <div data-role="page">
     {{> header}}
     <div data-role="ui-content">
-        
+        <form action="/send" method="POST" id="send-form">
+            {{#each people}}
+            {{> personFormField}} 
+            {{/each}}
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
     </div>
     {{> footer}}
 </div>

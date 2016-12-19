@@ -63,6 +63,9 @@ let exportedMethods = {
                     if (updatedInfo.email) {
                         updatedPersonData.email = updatedInfo.email;
                     }
+                    if (updatedInfo.residence) {
+                        updatedPersonData.residence = updatedInfo.residence;
+                    }
 
                     let updateCommand = {
                         $set: updatedPersonData
