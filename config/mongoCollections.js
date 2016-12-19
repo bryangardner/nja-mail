@@ -14,5 +14,5 @@ let getCollectionFn = (collection) => {
 }
 
 module.exports = {
-    brothers: getCollectionFn("brothers")
+    people: getCollectionFn("people")
 }
