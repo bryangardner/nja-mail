@@ -1,15 +1,11 @@
-const path = require("path");
-
-const interfaceConstructorMethod = (app) => {
+const constructorMethod = (app) => {
     app.get("/", (req, res) => {
-        let page = path.resolve(`static/index.html`);
-        res.sendFile(page);
+        res.render("layouts/home");
     });
 
     app.use("*", (req, res) => {
-        let page = path.resolve(`static/notfound.html`);
-        res.status(404).sendFile(page);
+        res.redirect("/")
     })
 }
 
-module.exports = interfaceConstructorMethod;
+module.exports = constructorMethod;
