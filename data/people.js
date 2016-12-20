@@ -24,6 +24,13 @@ let exportedMethods = {
         })
     },
 
+    getPeopleByList(listOfIds) {
+        if (!listOfIds) return Promise.reject("No list of IDs specified");
+        return people().then((peopleCollection) => {
+            return peopleCollection.find({_id: { $in: listOfIds}}).toArray();
+        })
+    },
+
     addPerson(firstName, lastName, email) {
         if (!firstName) return Promise.reject("No first name supplied");
         if (!lastName) return Promise.reject("No last name supplied");

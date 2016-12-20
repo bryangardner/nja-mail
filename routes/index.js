@@ -12,7 +12,11 @@ const constructorMethod = (app) => {
     });
 
     app.post("/send", (req, res) => {
-        console.log(req.body);
+        ids = Object.keys(req.body);
+        people.getPeopleByList(ids)
+        .then((resolvedPeople) => {
+            console.log(resolvedPeople)
+        })
     })
 
     app.get("/settings", (req, res) => {
@@ -36,4 +40,4 @@ const constructorMethod = (app) => {
     })
 }
 
-module.exports = constructorMethod;
+module.exports = constructorMethod; 
