@@ -1,9 +1,13 @@
 const express = require("express");
+const mailer = require('express-mailer');
 const bodyParser = require("body-parser");
 const exphbs = require('express-handlebars');
 const Handlebars = require('handlebars');
+const properties = require('properties-parser');
 const configRoutes = require("./routes");
 const path = require('path');
+
+const propertiesFile = "production.properties";
 
 const app = express();
 const static = express.static(__dirname + '/public');
@@ -36,6 +40,20 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
     // let the next middleware run:
     next();
 };
+
+configProperties = properties.read(propertiesFile);
+configProperties.secure = String(configProperties.secure) == 'true';
+console.log(configProperties);
+mailer.extend(app, {
+    from: configProperties.from,
+    host: configProperties.host,
+    secureConnection: configProperties.secure,
+    transportMethod: configProperties.transportMethod,
+    auth: {
+        user: configProperties.user,
+        pass: configProperties.pass
+    }
+})
 
 app.use("/public", static);
 app.use(bodyParser.json());
