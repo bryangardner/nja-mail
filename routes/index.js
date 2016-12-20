@@ -7,7 +7,7 @@ const constructorMethod = (app) => {
                 res.render("layouts/home", { people: allPeople })
             })
             .catch((error) => {
-                res.render("layouts/error", { error: e })
+                res.render("layouts/error", { error: error })
             })
     });
 
