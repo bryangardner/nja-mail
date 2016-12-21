@@ -1,22 +1,44 @@
 const people = require('../data').people;
 
-const constructorMethod = (app) => {
+const constructorMethod = (app, configProperties) => {
     app.get("/", (req, res) => {
         people.getAllPeople()
             .then((allPeople) => {
                 res.render("layouts/home", { people: allPeople })
             })
             .catch((error) => {
-                res.render("layouts/error", { error: error })
+                res.render("layouts/notify", { message: error })
             })
     });
 
-    app.post("/send", (req, res) => {
+    app.post("/", (req, res) => {
         ids = Object.keys(req.body);
         people.getPeopleByList(ids)
-        .then((resolvedPeople) => {
-            console.log(resolvedPeople)
-        })
+            .then((resolvedPeople) => {
+                let emailList = resolvedPeople.map((person) => {
+                    return person.email
+                })
+                if (emailList.length == 0) {
+                    return res.render("layouts/notify", { message: "No users selected" });
+                }
+                else {
+                    app.mailer.send('email/email',
+                        {
+                            to: configProperties.to,
+                            subject: configProperties.subject,
+                            bcc: emailList,
+                            body: configProperties.body
+                        },
+                        (error, message) => {
+                            if (error) {
+                                return res.render("layouts/notify", { message: error });
+                            }
+                            else {
+                                return res.render("layouts/notify", { message: "Notification successfully sent" });
+                            }
+                        })
+                }
+            })
     })
 
     app.get("/settings", (req, res) => {

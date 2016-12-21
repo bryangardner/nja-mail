@@ -42,12 +42,12 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
 };
 
 configProperties = properties.read(propertiesFile);
-configProperties.secure = String(configProperties.secure) == 'true';
-console.log(configProperties);
+
 mailer.extend(app, {
     from: configProperties.from,
     host: configProperties.host,
     secureConnection: configProperties.secure,
+    port: configProperties.port,
     transportMethod: configProperties.transportMethod,
     auth: {
         user: configProperties.user,
@@ -63,7 +63,7 @@ app.engine('handlebars', handlebarsInstance.engine)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
-configRoutes(app);
+configRoutes(app, configProperties);
 
 app.listen(3000, () => {
     console.log("We've now got a server!");
