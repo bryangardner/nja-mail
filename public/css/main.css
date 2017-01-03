@@ -1,0 +1,9 @@
+.splash {
+    margin: auto auto;
+    width: 50%;
+    height: 100%;
+}
+
+.splash h2 {
+    text-align: center;
+}
