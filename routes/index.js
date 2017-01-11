@@ -4,10 +4,14 @@ const constructorMethod = (app, configProperties) => {
     app.get("/", (req, res) => {
         people.getAllPeople()
             .then((allPeople) => {
-                res.render("layouts/home", { people: allPeople })
+                res.render("layouts/home", {
+                    people: allPeople
+                })
             })
             .catch((error) => {
-                res.render("layouts/notify", { message: error })
+                res.render("layouts/notify", {
+                    message: error
+                })
             })
     });
 
@@ -19,11 +23,11 @@ const constructorMethod = (app, configProperties) => {
                     return person.email
                 })
                 if (emailList.length == 0) {
-                    return res.render("layouts/notify", { message: "No users selected" });
-                }
-                else {
-                    app.mailer.send('email/email',
-                        {
+                    return res.render("layouts/notify", {
+                        message: "No users selected"
+                    });
+                } else {
+                    app.mailer.send('email/email', {
                             to: configProperties.to,
                             subject: configProperties.subject,
                             bcc: emailList,
@@ -31,10 +35,13 @@ const constructorMethod = (app, configProperties) => {
                         },
                         (error, message) => {
                             if (error) {
-                                return res.render("layouts/notify", { message: error });
-                            }
-                            else {
-                                return res.render("layouts/notify", { message: "Notification successfully sent" });
+                                return res.render("layouts/notify", {
+                                    message: error
+                                });
+                            } else {
+                                return res.render("layouts/notify", {
+                                    message: "Notification successfully sent"
+                                });
                             }
                         })
                 }
@@ -62,4 +69,4 @@ const constructorMethod = (app, configProperties) => {
     })
 }
 
-module.exports = constructorMethod; 
+module.exports = constructorMethod;

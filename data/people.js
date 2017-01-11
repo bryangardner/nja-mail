@@ -12,12 +12,13 @@ let exportedMethods = {
     getPersonById(id) {
         if (!id) return Promise.reject("No ID specified");
         return people().then((peopleCollection) => {
-            return peopleCollection.findOne({ _id: id })
+            return peopleCollection.findOne({
+                    _id: id
+                })
                 .then((person) => {
                     if (!person) {
                         return Promise.reject(`Person with ${id} not found`);
-                    }
-                    else {
+                    } else {
                         return person;
                     }
                 })
@@ -27,7 +28,11 @@ let exportedMethods = {
     getPeopleByList(listOfIds) {
         if (!listOfIds) return Promise.reject("No list of IDs specified");
         return people().then((peopleCollection) => {
-            return peopleCollection.find({_id: { $in: listOfIds}}).toArray();
+            return peopleCollection.find({
+                _id: {
+                    $in: listOfIds
+                }
+            }).toArray();
         })
     },
 
@@ -78,8 +83,8 @@ let exportedMethods = {
                         $set: updatedPersonData
                     }
                     return peopleCollection.updateOne({
-                        _id: id
-                    }, updateCommand)
+                            _id: id
+                        }, updateCommand)
                         .then((result) => {
                             return this.getPersonById(id);
                         })
@@ -90,12 +95,13 @@ let exportedMethods = {
     deletePerson(id) {
         if (!id) return Promise.reject("No ID specified");
         return people().then((peopleCollection) => {
-            return peopleCollection.removeOne({ _id: id })
+            return peopleCollection.removeOne({
+                    _id: id
+                })
                 .then((deletionInfo) => {
                     if (deletionInfo.deletedCount === 0) {
                         return Promise.reject(`Could not delete user with ID of ${id}`);
-                    }
-                    else {
+                    } else {
                         return Promise.resolve(`Deleted user with ID of ${id}`);
                     }
                 })

@@ -13,9 +13,9 @@ let _connection = undefined;
 let connectDb = () => {
     if (!_connection) {
         _connection = MongoClient.connect(fullMongoUrl)
-        .then((db) => {
-            return db;
-        });
+            .then((db) => {
+                return db;
+            });
     }
     return _connection;
 };

@@ -57,7 +57,9 @@ mailer.extend(app, {
 
 app.use("/public", static);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(rewriteUnsupportedBrowserMethods);
 app.engine('handlebars', handlebarsInstance.engine)
 app.set('views', path.join(__dirname, 'views'));
